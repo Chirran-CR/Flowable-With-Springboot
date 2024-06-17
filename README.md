@@ -64,7 +64,8 @@ POST /api/task/complete
         "accountBalance": 5000
     }
 }
-Key Components
+```
+## Key Components
 Flowable Configuration: Configured to integrate with Flowable for managing process definitions and instances.
 Service Tasks: Demonstrates the use of JavaDelegate to handle service tasks within processes.
 Call Activities: Shows how to invoke subprocesses using Call Activity, allowing modular and reusable process components.
@@ -75,17 +76,17 @@ Main Process Example
 
 Subprocess Example
 
-Usage Scenarios
+## Usage Scenarios
 Loan Approval Workflow: A simple workflow demonstrating a loan approval process where subprocesses handle different stages such as eligibility check and document verification.
 Task Automation: Example of automating repetitive tasks through Flowable processes with REST API integration for task management.
 Contributing
 Contributions are welcome! Please fork this repository and submit a pull request with your changes. Ensure to follow coding standards and include appropriate documentation.
 
-License
+## License
 This project is licensed under the MIT License. See the LICENSE file for details.
 
-Contact
-For questions or suggestions, feel free to reach out to me at your.email@example.com.
+## Contact
+For questions or suggestions, feel free to reach out to me at swainchittaranjan345@gmail.com.
 
 Happy coding!
 
