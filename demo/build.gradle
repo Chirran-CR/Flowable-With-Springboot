@@ -1,0 +1,49 @@
+plugins {
+	id 'java'
+	id 'war'
+	id 'org.springframework.boot' version '3.3.0'
+	id 'io.spring.dependency-management' version '1.1.5'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+//	implementation 'org.springframework.boot:spring-boot-starter-web'
+//	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+//	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+//	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+//	implementation group: 'org.flowable', name: 'flowable-engine', version: '6.7.1'
+//	implementation group: 'org.flowable', name:'flowable-spring-boot-starter', version: "6.7.1"
+//	implementation group: 'org.flowable', name:'flowable-spring-boot-starter-rest', version: "6.7.1"
+//	implementation group: 'org.flowable', name:'flowable-http', version: "6.7.1"
+//	implementation group: 'com.h2database', name: 'h2', version: '1.4.200'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	compileOnly 'org.springframework.boot:spring-boot-starter-tomcat'
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation 'org.springframework.boot:spring-boot-starter-hateoas'
+//	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.flowable:flowable-engine:6.7.1'
+	implementation 'org.flowable:flowable-spring-boot-starter:6.7.1'
+	implementation 'org.flowable:flowable-spring-boot-starter-rest:6.7.1'
+	implementation 'org.flowable:flowable-spring-boot-starter-actuator:6.7.1'
+	implementation 'org.flowable:flowable-spring-boot-starter-process:6.7.1'
+	implementation 'org.flowable:flowable-http:6.7.1'
+	implementation 'com.mysql:mysql-connector-j'
+//	implementation 'com.h2database:h2:1.4.200'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}

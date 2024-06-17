@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:flowable="http://flowable.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.flowable.org/processdef" exporter="Flowable Open Source Modeler" exporterVersion="6.7.1">
+  <process id="additonOfTwoNumber" name="Addition of two number" isExecutable="true">
+    <documentation>This will take two number from user and use that number to add by using script written in groovy and show in other user task</documentation>
+    <startEvent id="startEvent1" flowable:formFieldValidation="true"></startEvent>
+    <userTask id="sid-B3B74C09-A52D-41A2-8A68-F6D3F9961B84" name="Take two number" flowable:assignee="$INITIATOR" flowable:formKey="takingTwoNumber" flowable:formFieldValidation="true">
+      <extensionElements>
+        <modeler:activiti-idm-initiator xmlns:modeler="http://flowable.org/modeler"><![CDATA[true]]></modeler:activiti-idm-initiator>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="sid-8FDE34CE-003F-4B7A-9842-8C4990446E7D" sourceRef="startEvent1" targetRef="sid-B3B74C09-A52D-41A2-8A68-F6D3F9961B84"></sequenceFlow>
+    <sequenceFlow id="sid-6F94426F-5FF2-4FAB-A3F4-0FA4D01D553E" sourceRef="sid-B3B74C09-A52D-41A2-8A68-F6D3F9961B84" targetRef="sid-315E8012-BF4D-4BCC-BEFA-19F6EA93E36D"></sequenceFlow>
+    <scriptTask id="sid-315E8012-BF4D-4BCC-BEFA-19F6EA93E36D" name="Add two number" scriptFormat="javascript" flowable:autoStoreVariables="false">
+      <script><![CDATA[var firstnumber = execution.getVariable("firstnumber");
+var lastnumber = execution.getVariable("secondnumber");
+var result = firstnumber +  lastnumber;
+execution.setVariable("result", result);]]></script>
+    </scriptTask>
+    <userTask id="sid-05FC4E8E-97C1-4FA6-A795-7B4298B056B3" name="Show Result" flowable:assignee="$INITIATOR" flowable:formKey="showAdditionResultForm" flowable:formFieldValidation="true">
+      <extensionElements>
+        <modeler:activiti-idm-initiator xmlns:modeler="http://flowable.org/modeler"><![CDATA[true]]></modeler:activiti-idm-initiator>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="sid-498A1AB0-D171-4A4A-ABE1-2C36FD439950" sourceRef="sid-315E8012-BF4D-4BCC-BEFA-19F6EA93E36D" targetRef="sid-05FC4E8E-97C1-4FA6-A795-7B4298B056B3"></sequenceFlow>
+    <endEvent id="sid-844184F6-2A95-4D09-8791-6E9F92173693"></endEvent>
+    <sequenceFlow id="sid-0061A678-951A-4CEE-9822-25365A2E5CB9" sourceRef="sid-05FC4E8E-97C1-4FA6-A795-7B4298B056B3" targetRef="sid-844184F6-2A95-4D09-8791-6E9F92173693"></sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_additonOfTwoNumber">
+    <bpmndi:BPMNPlane bpmnElement="additonOfTwoNumber" id="BPMNPlane_additonOfTwoNumber">
+      <bpmndi:BPMNShape bpmnElement="startEvent1" id="BPMNShape_startEvent1">
+        <omgdc:Bounds height="30.0" width="30.000000000000014" x="99.99999788072391" y="134.99999713897728"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-B3B74C09-A52D-41A2-8A68-F6D3F9961B84" id="BPMNShape_sid-B3B74C09-A52D-41A2-8A68-F6D3F9961B84">
+        <omgdc:Bounds height="80.0" width="100.0" x="174.9999941719908" y="109.99999480777365"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-315E8012-BF4D-4BCC-BEFA-19F6EA93E36D" id="BPMNShape_sid-315E8012-BF4D-4BCC-BEFA-19F6EA93E36D">
+        <omgdc:Bounds height="80.0" width="100.0" x="319.99998739030747" y="109.99999480777365"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-05FC4E8E-97C1-4FA6-A795-7B4298B056B3" id="BPMNShape_sid-05FC4E8E-97C1-4FA6-A795-7B4298B056B3">
+        <omgdc:Bounds height="80.0" width="99.99999999999994" x="464.99997753567396" y="109.99999480777365"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-844184F6-2A95-4D09-8791-6E9F92173693" id="BPMNShape_sid-844184F6-2A95-4D09-8791-6E9F92173693">
+        <omgdc:Bounds height="28.0" width="28.0" x="609.9999775356739" y="135.99999480777365"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="sid-498A1AB0-D171-4A4A-ABE1-2C36FD439950" id="BPMNEdge_sid-498A1AB0-D171-4A4A-ABE1-2C36FD439950" flowable:sourceDockerX="50.0" flowable:sourceDockerY="40.0" flowable:targetDockerX="49.99999999999997" flowable:targetDockerY="40.0">
+        <omgdi:waypoint x="419.94998739030746" y="149.99999480777365"></omgdi:waypoint>
+        <omgdi:waypoint x="464.9999775356526" y="149.99999480777365"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-8FDE34CE-003F-4B7A-9842-8C4990446E7D" id="BPMNEdge_sid-8FDE34CE-003F-4B7A-9842-8C4990446E7D" flowable:sourceDockerX="15.0" flowable:sourceDockerY="15.0" flowable:targetDockerX="50.0" flowable:targetDockerY="40.0">
+        <omgdi:waypoint x="129.94999637082222" y="149.99999682108586"></omgdi:waypoint>
+        <omgdi:waypoint x="174.99999417197355" y="149.9999958663521"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-6F94426F-5FF2-4FAB-A3F4-0FA4D01D553E" id="BPMNEdge_sid-6F94426F-5FF2-4FAB-A3F4-0FA4D01D553E" flowable:sourceDockerX="50.0" flowable:sourceDockerY="40.0" flowable:targetDockerX="50.0" flowable:targetDockerY="40.0">
+        <omgdi:waypoint x="274.9499941719666" y="149.99999480777365"></omgdi:waypoint>
+        <omgdi:waypoint x="319.99998739027876" y="149.99999480777365"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-0061A678-951A-4CEE-9822-25365A2E5CB9" id="BPMNEdge_sid-0061A678-951A-4CEE-9822-25365A2E5CB9" flowable:sourceDockerX="50.0" flowable:sourceDockerY="40.0" flowable:targetDockerX="14.0" flowable:targetDockerY="14.0">
+        <omgdi:waypoint x="564.9499775356699" y="149.99999480777365"></omgdi:waypoint>
+        <omgdi:waypoint x="609.9999775356739" y="149.99999480777365"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

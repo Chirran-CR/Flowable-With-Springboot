@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:flowable="http://flowable.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.flowable.org/processdef" exporter="Flowable Open Source Modeler" exporterVersion="6.7.1">
+  <process id="loanProcess" name="Loan Approval Process" isExecutable="true">
+    <startEvent id="startEvent1" flowable:formFieldValidation="true"></startEvent>
+    <userTask id="sid-36721F99-557C-44B3-80FE-2174CF8B4638" name="Apply for loan" flowable:assignee="admin"  flowable:formKey="loanApplicationForm" flowable:formFieldValidation="true"></userTask>
+    <sequenceFlow id="sid-3F5C12DA-2F01-4274-AF8C-CD9295345A71" sourceRef="startEvent1" targetRef="sid-36721F99-557C-44B3-80FE-2174CF8B4638"></sequenceFlow>
+    <serviceTask id="sid-FB2B8555-B010-413C-89B4-E94F117FE152" name="Loan approval result" flowable:class="com.example.demo.delegate.LoanApprovalResult">
+<!--      <extensionElements>-->
+<!--        <flowable:field name="response" stringValue="${loanResultResponse}"/>-->
+<!--      </extensionElements>-->
+<!--      <extensionElements>-->
+<!--        <flowable:field name="response">-->
+<!--&lt;!&ndash;          <flowable:string>${loanApprovalResult.response}</flowable:string>&ndash;&gt;-->
+<!--          <flowable:string>${loanApprovalResult.response ? "true" : "false"}</flowable:string>-->
+<!--        </flowable:field>-->
+<!--      </extensionElements>-->
+    </serviceTask>
+    <endEvent id="sid-EEB0029D-DA71-4234-A981-4A8DB0B7E93B"></endEvent>
+    <sequenceFlow id="sid-6DF26696-BA15-4342-ADCA-63D0376098B8" sourceRef="sid-FB2B8555-B010-413C-89B4-E94F117FE152" targetRef="sid-EEB0029D-DA71-4234-A981-4A8DB0B7E93B"></sequenceFlow>
+    <callActivity id="sid-BE85AF95-79E1-431C-8993-CCD1E837C75D" name="Loan Process" calledElement="loanEligibilityCheck" flowable:calledElementType="key" flowable:inheritVariables="true" flowable:fallbackToDefaultTenant="false">
+      <!-- Mapping output variable from subprocess to main process -->
+      <extensionElements>
+        <flowable:out source="loanResult" target="loanResultResponse"/>
+      </extensionElements>
+    </callActivity>
+    <sequenceFlow id="sid-10518E1C-F609-47CC-A9D3-61A4ED545275" sourceRef="sid-36721F99-557C-44B3-80FE-2174CF8B4638" targetRef="sid-BE85AF95-79E1-431C-8993-CCD1E837C75D"></sequenceFlow>
+    <sequenceFlow id="sid-A67E254B-6AD5-43BE-B81D-4F9083B2BACC" sourceRef="sid-BE85AF95-79E1-431C-8993-CCD1E837C75D" targetRef="sid-FB2B8555-B010-413C-89B4-E94F117FE152"></sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_loanProcess">
+    <bpmndi:BPMNPlane bpmnElement="loanProcess" id="BPMNPlane_loanProcess">
+      <bpmndi:BPMNShape bpmnElement="startEvent1" id="BPMNShape_startEvent1">
+        <omgdc:Bounds height="30.0" width="30.000000000000014" x="99.99999380111755" y="140.99998370276722"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-36721F99-557C-44B3-80FE-2174CF8B4638" id="BPMNShape_sid-36721F99-557C-44B3-80FE-2174CF8B4638">
+        <omgdc:Bounds height="80.00000000000001" width="100.0" x="174.99999009238445" y="115.999981689455"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-FB2B8555-B010-413C-89B4-E94F117FE152" id="BPMNShape_sid-FB2B8555-B010-413C-89B4-E94F117FE152">
+        <omgdc:Bounds height="80.00000000000001" width="100.0" x="545.5555083781148" y="112.99998694525907"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-EEB0029D-DA71-4234-A981-4A8DB0B7E93B" id="BPMNShape_sid-EEB0029D-DA71-4234-A981-4A8DB0B7E93B">
+        <omgdc:Bounds height="28.0" width="28.0" x="690.5555258739157" y="138.99998923407702"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-BE85AF95-79E1-431C-8993-CCD1E837C75D" id="BPMNShape_sid-BE85AF95-79E1-431C-8993-CCD1E837C75D">
+        <omgdc:Bounds height="80.0" width="100.0" x="359.99998474121236" y="115.99998124440731"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="sid-6DF26696-BA15-4342-ADCA-63D0376098B8" id="BPMNEdge_sid-6DF26696-BA15-4342-ADCA-63D0376098B8" flowable:sourceDockerX="50.0" flowable:sourceDockerY="40.00000000000001" flowable:targetDockerX="14.0" flowable:targetDockerY="14.0">
+        <omgdi:waypoint x="645.5055083780935" y="152.9999879941255"></omgdi:waypoint>
+        <omgdi:waypoint x="690.5555258495059" y="152.99998894010045"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-3F5C12DA-2F01-4274-AF8C-CD9295345A71" id="BPMNEdge_sid-3F5C12DA-2F01-4274-AF8C-CD9295345A71" flowable:sourceDockerX="15.0" flowable:sourceDockerY="15.0" flowable:targetDockerX="50.0" flowable:targetDockerY="40.00000000000001">
+        <omgdi:waypoint x="129.94999229119668" y="155.99998342822465"></omgdi:waypoint>
+        <omgdi:waypoint x="174.99999009238445" y="155.99998260368181"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-A67E254B-6AD5-43BE-B81D-4F9083B2BACC" id="BPMNEdge_sid-A67E254B-6AD5-43BE-B81D-4F9083B2BACC" flowable:sourceDockerX="50.0" flowable:sourceDockerY="40.0" flowable:targetDockerX="50.0" flowable:targetDockerY="40.00000000000001">
+        <omgdi:waypoint x="459.9499847412121" y="155.19159940797687"></omgdi:waypoint>
+        <omgdi:waypoint x="545.5555083781148" y="153.8075603998531"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-10518E1C-F609-47CC-A9D3-61A4ED545275" id="BPMNEdge_sid-10518E1C-F609-47CC-A9D3-61A4ED545275" flowable:sourceDockerX="50.0" flowable:sourceDockerY="40.0" flowable:targetDockerX="50.0" flowable:targetDockerY="40.0">
+        <omgdi:waypoint x="274.9499900923845" y="155.9999815691718"></omgdi:waypoint>
+        <omgdi:waypoint x="359.9999810785021" y="155.9999813645702"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

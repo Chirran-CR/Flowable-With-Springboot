@@ -1,0 +1,44 @@
+spring:
+  application:
+    name: demo
+  datasource:
+#    driver-class-name: org.h2.Driver
+#    username: flowable
+#    password: flowable
+#    url: jdbc:h2:~/flowable-db/engine-db;AUTO_SERVER=TRUE;AUTO_SERVER_PORT=9093;DB_CLOSE_DELAY=-1
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: flowable
+    password: flowable
+    url: jdbc:mysql://localhost:3306/flowable?allowPublicKeyRetrieval=true&useSSL=false
+  h2:
+    console.enabled: true
+    console:
+      path: /h2-console
+      settings.trace: false
+      settings.web-allow-others: false
+  spring:
+    security:
+      user:
+        name: user
+        password: password
+      actuator:
+        enabled: true
+#    url: jdbc:h2:mem:testdb
+flowable:
+  database-schema-update: true
+  check-process-definitions: true
+  process-definition-location-prefix: classpath:/processes/
+server:
+  port: 8082
+management:
+  endpoint:
+    flowable:
+      enabled: true
+    health:
+      show-details: always
+  endpoints:
+    enabled-by-default: true
+    web:
+      exposure:
+        include: health, shutdown, env, info, flowable, mappings
+
